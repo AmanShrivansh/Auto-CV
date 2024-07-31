@@ -1,0 +1,345 @@
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+%	The MIT License (MIT)
+%
+%	Copyright (c) 2021 Jitin Nair
+%
+%	Permission is hereby granted, free of charge, to any person obtaining a copy
+%	of this software and associated documentation files (the "Software"), to deal
+%	in the Software without restriction, including without limitation the rights
+%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%	copies of the Software, and to permit persons to whom the Software is
+%	furnished to do so, subject to the following conditions:
+%	
+%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%	THE SOFTWARE.
+%	
+%
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT DEFINITION
+%----------------------------------------------------------------------------------------
+
+% article class because we want to fully customize the page and not use a cv template
+% \documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,10pt]{article}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+% % fontspec allows you to use TTF/OTF fonts directly
+% \usepackage{fontspec}
+% \defaultfontfeatures{Ligatures=TeX}
+
+% % modified for ShareLaTeX use
+% \setmainfont[
+% SmallCapsFont = Fontin-SmallCaps.otf,
+% BoldFont = Fontin-Bold.otf,
+% ItalicFont = Fontin-Italic.otf
+% ]
+% {Fontin.otf}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage{url}
+\usepackage{parskip} 	
+
+%other packages for formatting
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9]{geometry}
+
+%tabularx environment
+\usepackage{tabularx}
+
+%for lists within experience section
+\usepackage{enumitem}
+
+% centered version of 'X' col. type
+\newcolumntype{C}{>{\centering\arraybackslash}X} 
+
+%to prevent spillover of tabular into next pages
+\usepackage{supertabular}
+\newlength{\fullcollw}
+\setlength{\fullcollw}{0.47\textwidth}
+
+%custom \section
+\usepackage{titlesec}				
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{datetime} % Required for \formatdate
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\sffamily\bfseries\color{pblue}\raggedright}
+{}{0em}{}[]
+\titlespacing{\section}{0pt}{10pt}{2pt}
+% \titlespacing{\section}{1pt}{\parskip}{1pt}
+
+
+\newcommand{\customHeading}[1]{
+    \section{\texorpdfstring{#1 \hrulefill}{}}
+}
+
+\newcommand{\customSubHeading}[4]{
+    \begin{tabularx}{1.0\textwidth} {
+           >{\raggedright\arraybackslash}X
+           >{\raggedleft\arraybackslash}X
+           >{\raggedleft\arraybackslash}X
+           >{\raggedleft\arraybackslash}X  }
+          \textbf{#1} &\textbf{#2} & \textbf{#3} & #4 \\[2.0pt]
+    \end{tabularx}
+}
+
+
+%for publications
+\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
+
+%Setup hyperref package, and colours for links
+\usepackage[unicode, draft=false]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\setlength\bibitemsep{1em}
+
+%for social icons
+% \usepackage{fontawesome5}
+\usepackage{fontawesome}
+
+%----------------------------------------------------------------------------------------
+%	 COLOURS
+%----------------------------------------------------------------------------------------
+
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{sidecolor}{HTML}{E7E7E7}
+\definecolor{mainblue}{HTML}{0E5484}
+\definecolor{maingray}{HTML}{B9B9B9}
+
+\definecolor{pblue}{HTML}{0395DE}
+
+\definecolor{darkgray}{HTML}{333333}
+\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{lightgray}{HTML}{999999}
+\definecolor{green}{HTML}{C2E15F}
+\definecolor{orange}{HTML}{FDA333}
+\definecolor{purple}{HTML}{D3A4F9}
+\definecolor{red}{HTML}{FB4485}
+\definecolor{blue}{HTML}{6CE0F1}
+\definecolor{pblue}{HTML}{0395DE}
+\definecolor{materialpurple}{HTML}{9C27B0}
+\definecolor{materialindigo}{HTML}{3F51B5}
+\definecolor{materialblue}{HTML}{2196F3}
+\definecolor{materialcyan}{HTML}{00BCD4}
+\definecolor{materialteal}{HTML}{009688}
+\definecolor{materialgreen}{HTML}{4CAF50}
+\definecolor{materiallime}{HTML}{CDDC39}
+\definecolor{materialamber}{HTML}{FFC107}
+\definecolor{materialbrown}{HTML}{795548}
+\definecolor{materialred}{HTML}{FF4436}
+\definecolor{materialorange}{HTML}{FF5722}
+\definecolor{linkedin}{HTML}{0085AE}
+\definecolor{test}{HTML}{0077be}
+\definecolor{yt}{HTML}{c71610}
+
+
+
+
+
+%debug page outer frames
+%\usepackage{showframe}
+
+%----------------------------------------------------------------------------------------
+%	BEGIN DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+% non-numbered pages
+\pagestyle{empty} 
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+% \begin{tabularx}{\linewidth}{ @{}X X@{} }
+% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
+% \raisebox{-0.05\height}\faGithub\ username \ | \
+% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
+% \end{tabularx}
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+\Huge{Aman Shrivansh} \\[7.5pt]
+
+
+\href{https://github.com/ShubhamChouksey123}{\raisebox{-0.05\height}
+{\textnormal{\textcolor{gray}{\faGithub}}} 
+\ GitHub} 
+\ $|$ \ 
+\href{https://www.linkedin.com/in/amanshrivansh/}{\raisebox{-0.05\height} {\textnormal{\textcolor{linkedin}{\faLinkedin}}}   \ LinkedIn}  
+\ $|$ \ 
+
+%\href{https://shubhamchouksey123.github.io/portfolio/}%% {\raisebox{-0.05\height}
+%{\textnormal{\textcolor{test}{\faGlobe}}}       
+%\ shubham-chouksey.com} 
+%\ $|$ \ 
+\href{mailto:email@mysite.com}{\raisebox{-0.05\height}
+{\textnormal{\textcolor{yt}{\faEnvelope}}}
+\ amanshrivansh04@gmail.com} 
+$|$ \
+\\
+\href{tel:+000000000000}{\raisebox{-0.05\height}
+{\textnormal{\textcolor{gray}{\faMobile}}} 
+\ +91 9131680097} 
+\end{tabularx}
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+% EXPERIENCE SECTIONS
+%----------------------------------------------------------------------------------------
+
+%Experience
+% \section{Work Experience}
+
+
+\customHeading{Work Experience}
+\customSubHeading{Associate }
+{\href{https://www.nokia.com/}{\raisebox{-0.05\height}\ Nokia} }
+{Bengaluru, India}{August 2023 - present} 
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\multicolumn{2}{@{}X@{}}{
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
+        \item Test driven development of Restful webservices.
+        \item Follows CI/CD model of deployment and also involve in release process of application.
+        \item Closely follows agile methodology in project, following coding standard and best practices using gitflow workflow.
+        \item Collaboration with front-end developers, ensuring seamless API integration and providing feedback.
+        \item Conducted extensive testing and debugging to ensure system reliability and performance.
+        \item Host scrum calls and also give demo to clients for the products developed in the sprint.
+        %\item Assisted in managing technical design, and documentation, crafted Jira user stories, streamlining development.
+        \item Java, Spring boot, SQL, Scrum, Hibernate, Apacche Kafka, JPA, Hibernate, Git, Agile, Debugging, RESTful API
+    \end{itemize}
+\end{minipage}
+} 
+\end{tabularx}
+
+
+\customSubHeading{Graduate Engineer Trainee}
+{\href{https://www.nokia.com/}{\raisebox{-0.05\height}\ Nokia} }
+{Bengaluru, India}{January 2023 - August 2023}
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\multicolumn{2}{@{}X@{}}{
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
+        \item Designed and implemented RESTful APIs in Spring Boot to manage video streaming service.
+        \item Integrated advanced algorithms for video encoding, compression, and real-time streaming optimization.
+        \item Leveraged relational databases technologies for efficient data storage and retrieval. 
+        \item Java, Spring/Spring Boot, Microservices, RESTful APIs, and database management
+    \end{itemize}
+\end{minipage}
+}
+\end{tabularx}
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	SKILLS
+%----------------------------------------------------------------------------------------
+% \section{Skills}
+\customHeading{Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+Languages &  \normalsize{Java, C/C++, JavaScript, Python, SQL, Solidity}\\
+
+Frameworks  &  \normalsize{Spring, J2EE, Spring boot, Hibernate, JUnit, Mockito, Unit Testing, jQuery, ReactJs, JPA}\\ 
+
+Technologies \& Tools  &  \normalsize{MySQL, MongoDB, Postgres, S3, Kafka, Bootstrap,
+Version Control tools like GIT/SVN, Amazon Web Services(AWS), Docker, Selenium, TDD,  Web Development, Linux, API Development, IntelliJ, NoSQL, Postman}\\  
+
+Some More Skills  &  \normalsize{GCP, Microservices, Backend, Full-stack, Design patterns, Architecture, problem solving, CICD Jenkins pipeline, JIRA, REST and SOAP web service, Software Developer}\\  
+\end{tabularx}
+
+
+%----------------------------------------------------------------------------------------
+% PROJECTS SECTIONS
+%----------------------------------------------------------------------------------------
+%Projects
+% \section{Projects}
+\vspace{-0.5cm}
+\customHeading{Projects}
+\begin{tabularx}{\linewidth}{ @{}X r@{} }
+    \multicolumn{2}{@{}X@{}}{
+        \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
+            \item \textbf{Quiz Application:} Creator of a responsive quiz, daily facts, and news application showcasing frontend and back-end proficiency with Java, Spring Boot, JavaScript, PostgreSQL for database management, and Gmail SMTP for seamless communication.
+            \hspace{12.5cm}
+            \href{https://github.com/AmanShrivansh/Quiz-Website}{Link to Github}
+            \begin{itemize}[nosep, leftmargin=1.5em, itemsep=3pt]
+                \item \textbf{Technologies:} Java, HTML, CSS, JS, React.js, PostgreSQL, Shell Script, HTML5, AWS, Docker
+            \end{itemize}
+            
+            \item \textbf{Facts and News Website:} Dive into a world of random facts. Explore a curated collection of the latest trending news. Utilize a convenient search bar to find news related to specific topics. Navigate through distinct categories including travel, photography, style, food \& drinks, and culture.\hspace{8cm}\href{https://amanshrivansh.github.io/Facts-And-News/}{Link to Website}
+            \begin{itemize}[nosep, leftmargin=1.5em, itemsep=3pt]
+                \item \textbf{Technologies:} Java, HTML, CSS, JS, React.js, PostgreSQL, Shell Script, HTML5, Amazon Web Services(AWS), Docker
+            \end{itemize}
+            
+        \end{itemize}
+    }
+\end{tabularx}
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+% \section{Education}
+\vspace{-1cm}
+\customHeading{Education}
+\begin{tabularx}{\linewidth}{@{}l X@{}}	
+2020 - 2023 & MCA at \textbf{National Institute of Technology(NIT), Tiruchirappalli} \hfill \normalsize (GPA: 8.21/10.0) \\
+
+Relevant Coursework: & Computer science, Databases, Data Structures, Algorithms, operating systems, Object Oriented Programming(OOP)
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{@{}l X@{}}	
+2021 - 2020 & BCA at \textbf{Prestige Institute Of Management Research(PIMR), Indore} \hfill \normalsize (GPA: 7.92/10.0) \\
+
+Relevant Coursework: & Computer science, Web Development, Data Structures, Algorithms, Computer Networking
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+%	AWARDS AND ACHIEVEMENTS	
+%----------------------------------------------------------------------------------------
+% \section{Awards Achievements}
+\customHeading{Awards \& Achievements}
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
+        \item Won Bronze Medal amongst 23 engineering colleges for innovative startup idea challenge organized by DAVV university.
+        \item Secured 124th position in NIMCET 2020 , 12th rank in BHU MCA entrance exam , selected for JNU MCA .
+        \item  Ranked amongst the top 0.1\% (amongst 1,20,000 candidates) in NIMCET 2020 and top 0.02\% (amongst 50,000 candidates) in BHU MCA 2020.
+        
+    \end{itemize}
+\end{minipage}
+
+
+
+
+
+\vfill
+% \center{\footnotesize Last updated: \today}
+
+\end{document}
